@@ -11,6 +11,7 @@ const SAMPLE_QUOTES = [
 ];
 
 const QuoteDetail = () => {
+	const match = useRouteMatch();
 	const params = useParams();
 
 	const quote = SAMPLE_QUOTES.find((quote) => {
@@ -24,14 +25,14 @@ const QuoteDetail = () => {
 	return (
 		<React.Fragment>
 			<HighlightedQuote text={quote.text} author={quote.author} />
-			<Route path={`/quotes/${params.id}`} exact>
+			<Route path={match.path} exact>
 				<div className="centered">
-					<Link className="btn--flat" to={`/quotes/${params.id}/comments`}>
+					<Link className="btn--flat" to={`${match.url}/comments`}>
 						Load Comments
 					</Link>
 				</div>
 			</Route>
-			<Route path={`/quotes/${params.id}/comments`}>
+			<Route path={`${match.path}/comments`}>
 				<Comments />
 			</Route>
 		</React.Fragment>
